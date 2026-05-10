@@ -1,6 +1,6 @@
 # =============================================================================
 # Data Insight Team - Streamlit Chat App for Databricks Genie
-# Status: BETA - DO NOT USE IN PRODUCTION --
+# Status: BETA - DO NOT USE IN PRODUCTION
 # =============================================================================
 
 APP_VERSION = "DO NOT USE IN PRODUCTION — beta v0.0.7 [2026-05-10 00:40 EDT]"
