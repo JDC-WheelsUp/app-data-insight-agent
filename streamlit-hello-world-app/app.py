@@ -24,6 +24,17 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# Force Streamlit's own built-in theme to light so it doesn't fight our CSS
+st.markdown(
+    """
+    <style>
+    /* Ensure Streamlit base uses light mode regardless of OS preference */
+    [data-testid="stAppViewContainer"] { color-scheme: light; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 def log(msg):
     """Print to stdout so it shows up in Databricks App logs (Source: APP)."""
@@ -100,6 +111,16 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 if "show_example" not in st.session_state:
     st.session_state.show_example = None
+if "dark_mode" not in st.session_state:
+    st.session_state.dark_mode = False
+
+# ---------- Theme injection ----------
+# Inject body class so CSS variables switch between light/dark
+_theme_class = "theme-dark" if st.session_state.dark_mode else "theme-light"
+st.markdown(
+    f'<script>document.body.className = "{_theme_class}";</script>',
+    unsafe_allow_html=True,
+)
 
 
 # ---------- Sidebar ----------
@@ -116,6 +137,12 @@ with st.sidebar:
         st.session_state.conversation_id = None
         st.session_state.messages = []
         st.session_state.show_example = None
+        st.rerun()
+
+    _theme_label = "🌙 Dark mode" if not st.session_state.dark_mode else "☀️ Light mode"
+    if st.button(_theme_label, key="theme_toggle_btn", use_container_width=True,
+                 help="Toggle between light and dark theme"):
+        st.session_state.dark_mode = not st.session_state.dark_mode
         st.rerun()
 
     st.markdown("---")

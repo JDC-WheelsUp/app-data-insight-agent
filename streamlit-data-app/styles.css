@@ -1,0 +1,138 @@
+/* =============================================================================
+   Streamlit Data App - Styles
+   Theme: Light (default) | Dark (toggled via body.theme-dark)
+   ============================================================================= */
+
+/* ── Light theme (default) ── */
+:root {
+  --bg-app:         #f5f6fa;
+  --bg-sidebar:     #ffffff;
+  --bg-card:        #ffffff;
+  --bg-input:       #ffffff;
+  --border-color:   #dde1ea;
+  --accent:         #FF3621;
+  --accent-hover:   #d42c1a;
+  --text-primary:   #1a1a2e;
+  --text-secondary: #5a5f7a;
+  --text-muted:     #9095ae;
+  --text-on-accent: #ffffff;
+  --shadow-card:    0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* ── Dark theme overrides ── */
+body.theme-dark {
+  --bg-app:         #1a1a2e;
+  --bg-sidebar:     #16213e;
+  --bg-card:        #0f3460;
+  --bg-input:       #2a2a4a;
+  --border-color:   #3a3a5c;
+  --accent:         #FF3621;
+  --accent-hover:   #ff5a47;
+  --text-primary:   #e8eaf0;
+  --text-secondary: #a0a8c8;
+  --text-muted:     #6a7090;
+  --text-on-accent: #ffffff;
+  --shadow-card:    0 1px 6px rgba(0,0,0,0.4);
+}
+
+/* ── Base ── */
+.stApp {
+  background-color: var(--bg-app) !important;
+  color: var(--text-primary) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+#MainMenu, footer { visibility: hidden; }
+
+.block-container {
+  padding: 1.5rem 2rem !important;
+  max-width: 1200px !important;
+  margin: auto !important;
+}
+
+/* ── Page header ── */
+h1, h2, h3 {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+
+/* ── Subheader / labels ── */
+.stMarkdown p, label, .stText {
+  color: var(--text-primary) !important;
+}
+
+/* ── Text inputs ── */
+[data-testid="stTextInput"] input {
+  background: var(--bg-input) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+[data-testid="stTextInput"] input:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(255,54,33,0.15) !important;
+  outline: none !important;
+}
+
+/* ── Metric / KPI display ── */
+[data-testid="stMetric"] {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+[data-testid="stMetricValue"] {
+  color: var(--accent) !important;
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+}
+
+[data-testid="stMetricLabel"] {
+  color: var(--text-secondary) !important;
+  font-size: 0.85rem !important;
+}
+
+/* ── Dataframe ── */
+[data-testid="stDataFrame"] {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+/* ── Charts ── */
+[data-testid="stVegaLiteChart"],
+[data-testid="stArrowVegaLiteChart"] {
+  border-radius: 12px !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-card) !important;
+  padding: 0.5rem !important;
+  background: var(--bg-card) !important;
+}
+
+/* ── Theme toggle button ── */
+[data-testid="stButton"] > button {
+  border-radius: 8px !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+[data-testid="stButton"] > button:hover {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px rgba(255,54,33,0.15) !important;
+  color: var(--accent) !important;
+}
+
+/* ── Divider ── */
+hr {
+  border-color: var(--border-color) !important;
+  margin: 1rem 0 !important;
+}
