@@ -1,43 +1,8 @@
 /* =============================================================================
    Data Insight Team - Streamlit Styles
-   Theme: Light (default) | Dark (toggled via body.theme-dark)
+   Theme tokens are injected into :root by Python on every rerun.
+   See THEME_LIGHT / THEME_DARK dicts in app.py.
    ============================================================================= */
-
-/* ── Light theme (default) ── */
-:root {
-  --bg-app:         #f5f6fa;
-  --bg-sidebar:     #ffffff;
-  --bg-card:        #ffffff;
-  --bg-input:       #ffffff;
-  --bg-btn-dl:      #f0f2f8;
-  --border-color:   #dde1ea;
-  --accent:         #FF3621;
-  --accent-hover:   #d42c1a;
-  --text-primary:   #1a1a2e;
-  --text-secondary: #5a5f7a;
-  --text-muted:     #9095ae;
-  --text-on-accent: #ffffff;
-  --text-version:   #e05a00;
-  --shadow-card:    0 1px 4px rgba(0,0,0,0.08);
-}
-
-/* ── Dark theme overrides ── */
-body.theme-dark {
-  --bg-app:         #1a1a2e;
-  --bg-sidebar:     #16213e;
-  --bg-card:        #0f3460;
-  --bg-input:       #2a2a4a;
-  --bg-btn-dl:      #2a2a4a;
-  --border-color:   #3a3a5c;
-  --accent:         #FF3621;
-  --accent-hover:   #ff5a47;
-  --text-primary:   #e8eaf0;
-  --text-secondary: #a0a8c8;
-  --text-muted:     #6a7090;
-  --text-on-accent: #ffffff;
-  --text-version:   #ffb84d;
-  --shadow-card:    0 1px 6px rgba(0,0,0,0.4);
-}
 
 /* ── Base ── */
 .stApp {

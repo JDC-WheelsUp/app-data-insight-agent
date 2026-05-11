@@ -24,16 +24,48 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Force Streamlit's own built-in theme to light so it doesn't fight our CSS
-st.markdown(
-    """
-    <style>
-    /* Ensure Streamlit base uses light mode regardless of OS preference */
-    [data-testid="stAppViewContainer"] { color-scheme: light; }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+THEME_LIGHT = {
+    "--bg-app":         "#f5f6fa",
+    "--bg-sidebar":     "#ffffff",
+    "--bg-card":        "#ffffff",
+    "--bg-input":       "#ffffff",
+    "--bg-btn-dl":      "#f0f2f8",
+    "--border-color":   "#dde1ea",
+    "--accent":         "#FF3621",
+    "--accent-hover":   "#d42c1a",
+    "--text-primary":   "#1a1a2e",
+    "--text-secondary": "#5a5f7a",
+    "--text-muted":     "#9095ae",
+    "--text-on-accent": "#ffffff",
+    "--text-version":   "#e05a00",
+    "--shadow-card":    "0 1px 4px rgba(0,0,0,0.08)",
+}
+
+THEME_DARK = {
+    "--bg-app":         "#1a1a2e",
+    "--bg-sidebar":     "#16213e",
+    "--bg-card":        "#0f3460",
+    "--bg-input":       "#2a2a4a",
+    "--bg-btn-dl":      "#2a2a4a",
+    "--border-color":   "#3a3a5c",
+    "--accent":         "#FF3621",
+    "--accent-hover":   "#ff5a47",
+    "--text-primary":   "#e8eaf0",
+    "--text-secondary": "#a0a8c8",
+    "--text-muted":     "#6a7090",
+    "--text-on-accent": "#ffffff",
+    "--text-version":   "#ffb84d",
+    "--shadow-card":    "0 1px 6px rgba(0,0,0,0.4)",
+}
+
+
+def inject_theme(dark: bool) -> None:
+    """Inject CSS variable values into :root so every var() in styles.css resolves correctly.
+    Called on every rerun — Streamlit re-renders the full page so the new values take effect
+    immediately without any JavaScript."""
+    tokens = THEME_DARK if dark else THEME_LIGHT
+    vars_css = "\n".join(f"  {k}: {v};" for k, v in tokens.items())
+    st.markdown(f"<style>:root {{\n{vars_css}\n}}</style>", unsafe_allow_html=True)
 
 
 def log(msg):
@@ -115,12 +147,10 @@ if "dark_mode" not in st.session_state:
     st.session_state.dark_mode = False
 
 # ---------- Theme injection ----------
-# Inject body class so CSS variables switch between light/dark
-_theme_class = "theme-dark" if st.session_state.dark_mode else "theme-light"
-st.markdown(
-    f'<script>document.body.className = "{_theme_class}";</script>',
-    unsafe_allow_html=True,
-)
+# Writes the correct CSS variable values into :root on every rerun.
+# No JavaScript needed — Streamlit strips <script> tags; this pure-CSS
+# approach works because Streamlit does a full page re-render on rerun.
+inject_theme(st.session_state.dark_mode)
 
 
 # ---------- Sidebar ----------
